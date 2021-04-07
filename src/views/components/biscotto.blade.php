@@ -71,7 +71,7 @@
 .setting .contents {
   display:flex;
   justify-content:space-evenly;
-  flex-wrap:wrap;
+  /* flex-wrap:wrap; */
   margin-top:20px;
   gap:20px;
 }
@@ -143,6 +143,9 @@
 
 <script>
 
+    // Required varaibles
+    let cookieStorageName = 'cookie_status';
+
     function showCookieSettings () {
         let setting = document.querySelector('#cookie-settings');
         if (setting.style.display === "none") {
@@ -150,6 +153,22 @@
         } else {
             setting.style.display = "none";
         }
+    }
+
+    function addItemStorage(key, data) {
+        window.localStorage.setItem(key, data);
+    }
+
+    function getItemStorage(key) {
+        return window.localStorage.getItem(key)
+    }
+
+    function revomeItemStorage(key) {
+        window.localStorage.removeItem(key);
+    }
+
+    function killStorage(key) {
+        window.localStorage.clear();
     }
 
     // Returns an object of key value pairs for this page's cookies
@@ -177,13 +196,140 @@
         }
         return cookieObj;
     }
+    // Delete cookie
+    function eraseCookie(name) {
+        document.cookie = name + '=; Max-Age=0'
+    }
 
-    console.log(getPageCookies());
+    function showCookie () {
+        let setting = document.querySelector('#cookie-plugin');
+
+        if (setting.style.display === "none") {
+            setting.style.display = "block";
+        } else {
+            setting.style.display = "none";
+        }
+    }
+
+    // Function the accept the cookie
+    function acceptCookie(enableAll = false) {
+        let setting = document.querySelector('#cookie-plugin');
+        setting.style.display = "none";
+
+        // Check witch item the user wants to enable or disable
+        let functional = document.querySelector('#cookie-functional');
+        let statstics  = document.querySelector('#cookie-statstics');
+        let marketing  = document.querySelector('#cookie-marketing');
+
+        // Object that use the options the customer select
+        var cookieOptions = [{
+            'necessary':true
+        }];
+
+        // Functional
+        if (enableAll) {
+            cookieOptions.push({'functional':true});
+            cookieOptions.push({'statstics':true});
+            cookieOptions.push({'marketing':true});
+        } else {
+            if (functional.checked) {
+                cookieOptions.push({'functional':true});
+            } else {
+                cookieOptions.push({'functional':false});
+            }
+
+            // Statstics
+            if (statstics.checked) {
+                cookieOptions.push({'statstics':true});
+            } else {
+                cookieOptions.push({'statstics':false});
+            }
+
+            // Marketing
+            if (marketing.checked) {
+                cookieOptions.push({'marketing':true});
+            } else {
+                cookieOptions.push({'marketing':false});
+            }
+        }
+
+        // The storage varaible that will make the user save the option if the cookie is enable
+        addItemStorage(cookieStorageName, true);
+            (async () => {
+                const rawResponse = await fetch('/biscotto/savecookie', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type"    : "application/json",
+                        "Accept"          : "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token"    : '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        cookie_options           : cookieOptions,
+                    })
+                });
+                const content = await rawResponse.json();
+                console.log(content);
+                // Check for errors
+                if (content.errors) {
+                    for (const [key, value] of Object.entries(content.errors)) {
+                        console.log(value);
+                    }
+                } else {
+
+                }
+            })();
+
+        // Reload the page to make sure chagne has happen
+        location.reload();
+        // console.log(cookieOptions);
+        // Dynamic way to remove script from doom
+        //const scriptList = document.querySelectorAll("script[type='text/javascript']");
+        //console.log(scriptList[0].src);
+        //const convertedNodeList = Array.from(scriptList);
+        //const testScript = convertedNodeList[0];
+        //testScript.parentNode.removeChild(testScript);
+
+        //const scriptList2 = document.querySelectorAll("script[type='text/javascript']");
+
+        //console.log(scriptList2);
+
+    }
+
+    // for (const [key, value] of Object.entries(getPageCookies())) {
+    //     eraseCookie(key);
+    // }
+    //     console.log(getPageCookies());
 
 </script>
 
+{{-- necessary no need to add --}}
+@if (!empty(Session::get('cookie_necessary')))
+    @if (Session::get('cookie_necessary'))
+        {{ $cookie_necessary }}
+    @endif
+@endif
+{{-- functional scripts slot --}}
+@if (!empty(Session::get('cookie_functional')))
+    @if (Session::get('cookie_functional'))
+        {{ $cookie_functional }}
+    @endif
+@endif
 
-<div class="cookie-container">
+{{-- Statstics script slot--}}
+@if (!empty(Session::get('cookie_statstics')))
+    @if (Session::get('cookie_statstics'))
+        {{ $cookie_statstics }}
+    @endif
+@endif
+{{-- marketing script slot --}}
+@if (!empty(Session::get('cookie_marketing')))
+    @if (Session::get('cookie_marketing'))
+        {{ $cookie_marketing }}
+    @endif
+@endif
+
+<div class="cookie-container" id="cookie-plugin" >
     <div class="cookie-card main">
         <h3>Do you allow us to use cookies? </h3>
         <p>
@@ -191,7 +337,7 @@
         </p>
         <div class="cookie-buttons">
             <button class="cookie-btn" onclick="showCookieSettings()" >Customize</button>
-            <button class="cookie-btn bg">Allow All</button>
+            <button class="cookie-btn bg" onclick="acceptCookie(true)" >Allow All</button>
         </div>
     </div>
     <div class="cookie-card setting" style="display:none" id="cookie-settings" >
@@ -210,29 +356,194 @@
             <div class="content">
                 <span>Functional</span>
                 <label class="switch">
-                <input type="checkbox" >
+                <input type="checkbox" checked  id="cookie-functional" >
                 <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
                 <span>Statstics</span>
                 <label class="switch">
-                <input type="checkbox">
-                <span class="rounded"></span>
+                <input type="checkbox" id="cookie-statstics" >
+                <span class="rounded" ></span>
                 </label>
             </div>
             <div class="content">
                 <span>Marketing</span>
                 <label class="switch">
-                <input type="checkbox">
-                <span class="rounded"></span>
+                <input type="checkbox" id="cookie-marketing" >
+                <span class="rounded" ></span>
                 </label>
             </div>
         </div>
         <div class="actions">
-            <button class="cookie-btn bg">Save and Submit</button>
+            <button class="cookie-btn bg" onclick="acceptCookie()" >Save and Submit</button>
         </div>
     </div>
 </div>
 
 
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.ba-we-love-subscribers {
+	width: 290px;
+	height: 50px;
+	background-color: #fff;
+	border-radius: 15px;
+	box-shadow: 0px 12px 45px rgba(0, 0, 0, .15);
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+	margin: 0 0 10px 0;
+	overflow: hidden;
+	opacity: 0;
+}
+.ba-we-love-subscribers.open {
+	height: 270px;
+	opacity: 1;
+}
+.ba-we-love-subscribers.popup-ani {
+	-webkit-transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.ba-we-love-subscribers h1 {
+	font-size: 20px;
+	color: #757575;
+	padding: 25px 0;
+	margin: 0;
+  font-weight:400;
+  font-family: 'Roboto', sans-serif;
+
+}
+.ba-we-love-subscribers .love {
+	width: 20px;
+	height: 20px;
+	background-position: 35px 84px;
+	display: inline-block;
+	margin: 0 6px;
+	background-size: 62px;
+}
+.ba-we-love-subscribers .ba-logo {
+	width: 65px;
+	height: 25px;
+	background-position: 0px;
+	margin: 0 auto;
+	opacity: .5;
+	cursor: pointer;
+}
+.ba-we-love-subscribers .ba-logo:hover {
+	opacity: 1;
+}
+.logo-ani {
+	transition: 0.5s linear;
+	-webkit-transition: 0.5s linear;
+}
+.ba-we-love-subscribers input {
+	font-size: 14px;
+	padding: 12px 15px;
+	border-radius: 15px;
+	border: 0;
+	outline: none;
+	margin: 8px 0;
+	width: 100%;
+	box-sizing: border-box;
+	line-height: normal;
+	/*Bootstrap Overide*/
+	font-family: sans-serif;
+	/*Bootstrap Overide*/
+}
+.ba-we-love-subscribers form {
+	padding: 5px 30px 0;
+	margin-bottom: 15px;
+}
+.ba-we-love-subscribers input[name="email"] {
+	background-color: #eee;
+}
+.ba-we-love-subscribers input[name="submit"] {
+	background-color: #00aeef;
+	cursor: pointer;
+	color: #fff;
+}
+.ba-we-love-subscribers input[name="submit"]:hover {
+	background-color: #26baf1;
+}
+.ba-we-love-subscribers .img {
+	background-image: url("https://4.bp.blogspot.com/-1J75Et4_5vc/WAYhWRVuMiI/AAAAAAAAArE/gwa-mdtq0NIqOrlVvpLAqdPTV4VAahMsQCPcB/s1600/barrel-we-love-subscribers-img.png");
+}
+.ba-we-love-subscribers-fab {
+	width: 65px;
+	height: 65px;
+	background-color: #00aeef;
+	border-radius: 30px;
+	float: right;
+	box-shadow: 0px 12px 45px rgba(0, 0, 0, .3);
+	z-index: 5;
+	position: relative;
+}
+.ba-we-love-subscribers-fab .img-fab {
+	height: 30px;
+	width: 30px;
+	margin: 15px auto;
+	background-image: url("https://4.bp.blogspot.com/-1J75Et4_5vc/WAYhWRVuMiI/AAAAAAAAArE/gwa-mdtq0NIqOrlVvpLAqdPTV4VAahMsQCPcB/s1600/barrel-we-love-subscribers-img.png");
+	background-position: -1px -53px;
+}
+.ba-we-love-subscribers-fab .wrap {
+	transform: rotate(0deg);
+	-webkit-transition: all .15s cubic-bezier(0.15, 0.87, 0.45, 1.23);
+	transition: all .15s cubic-bezier(0.15, 0.87, 0.45, 1.23);
+}
+.ba-we-love-subscribers-fab .ani {
+	transform: rotate(45deg);
+	-webkit-transition: all .15s cubic-bezier(0.15, 0.87, 0.45, 1.23);
+	transition: all .15s cubic-bezier(0.15, 0.87, 0.45, 1.23);
+}
+.ba-we-love-subscribers-fab .close {
+	background-position: -2px 1px;
+	transform: rotate(-45deg);
+	float: none;
+	/*Bootstrap Overide*/
+	opacity: 1;
+	/*Bootstrap Overide*/
+}
+.ba-we-love-subscribers-wrap {
+	position: fixed;
+	right: 25px;
+	bottom: 25px;
+	z-index: 1000;
+}
+.ba-settings {
+	position: absolute;
+	top: -25px;
+	right: 0px;
+	padding: 10px 20px;
+	background-color: #555;
+	border-radius: 5px;
+	color: #fff;
+}
+
+.floater {
+  display: flex;
+  align-content: center;
+}
+
+</style>
+
+<div class="ba-we-love-subscribers-wrap" onclick="showCookie()" >
+	<div class="ba-we-love-subscribers-fab">
+		<div class="floater">
+			🍪
+		</div>
+	</div>
+</div>
+
+<script>
+
+  // If the cookie is accpetd will hide on load
+  if (getItemStorage(cookieStorageName)) {
+        if (getItemStorage(cookieStorageName)) {
+          let setting = document.querySelector('#cookie-plugin');
+          setting.style.display = "none";
+        }
+    }
+
+</script>

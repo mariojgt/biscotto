@@ -32,24 +32,34 @@ You have 2 options.
 2. Setup you composer to use local VCS
 
 3. ```javascript
-   "repositories": [
-           {
-               "type" : "path",
-               "url": "packages/biscotto", // Path to your local folder package
-               "options": {
-                   "symlink": true
-               }
-           }
-       ],
-       "require": {
-           "php": "^7.3|^8.0", //Example
-           "fideloper/proxy": "^4.4",//Example
-           "fruitcake/laravel-cors": "^2.0",//Example
-           "guzzlehttp/guzzle": "^7.0.1",//Example
-           "laravel/framework": "^8.12",//Example
-           "laravel/tinker": "^2.5",//Example
-           "mariojgt/biscotto": "@dev"// Here is where you add the package reference
-       },
+   <x-biscotto::biscotto>
+
+    <x-slot name="cookie_necessary">
+        necessary
+    </x-slot>
+
+    <x-slot name="cookie_functional">
+        functional
+    </x-slot>
+
+    <x-slot name="cookie_statstics">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152696431-2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-152696431-2');
+        </script>
+
+    </x-slot>
+
+    <x-slot name="cookie_marketing">
+        marketing
+    </x-slot>
+
+</x-biscotto::biscotto>
    ```
 
 4. php artsain vendor:publish --force  (select the package number)

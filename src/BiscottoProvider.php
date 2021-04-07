@@ -15,6 +15,9 @@ class BiscottoProvider extends ServiceProvider
     {
         // Load biscotto views
         $this->loadViewsFrom(__DIR__.'/views', 'biscotto');
+
+        // Load biscotto routes
+        $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
     }
 
     /**
