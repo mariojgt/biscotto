@@ -152,6 +152,34 @@
         }
     }
 
+    // Returns an object of key value pairs for this page's cookies
+    function getPageCookies(){
+
+        // cookie is a string containing a semicolon-separated list, this split puts it into an array
+        var cookieArr = document.cookie.split(";");
+
+        // This object will hold all of the key value pairs
+        var cookieObj = {};
+
+        // Iterate the array of flat cookies to get their key value pair
+        for(var i = 0; i < cookieArr.length; i++){
+
+            // Remove the standardized whitespace
+            var cookieSeg = cookieArr[i].trim();
+
+            // Index of the split between key and value
+            var firstEq = cookieSeg.indexOf("=");
+
+            // Assignments
+            var name = cookieSeg.substr(0,firstEq);
+            var value = cookieSeg.substr(firstEq+1);
+            cookieObj[name] = value;
+        }
+        return cookieObj;
+    }
+
+    console.log(getPageCookies());
+
 </script>
 
 
@@ -182,7 +210,7 @@
             <div class="content">
                 <span>Functional</span>
                 <label class="switch">
-                <input type="checkbox" checked >
+                <input type="checkbox" >
                 <span class="rounded"></span>
                 </label>
             </div>
