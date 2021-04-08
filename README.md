@@ -1,11 +1,21 @@
 # Biscotto, GDPR cookie manager for Laravel
 
+## How to Install
+
+1: composer require mariojgt/biscotto
+
+2: You need to publish the config files otherwise will not work, to publish the file run the following
+
+3: php artisan v:p --force 
+
+4:select the number of the biscotto provider Provider: Mariojgt\Biscotto\BiscottoProvider
+
 ### features
 
-- Cookie list to disable
-- Scripts and iframes or anything with src can be disable using this package
-- All define using config variables
-- Lightweight pure vanilia javascript
+- Cookie list to disable.
+- Scripts and iframes or anything with src can be disable using this package.
+- All define using config variables.
+- Lightweight pure vanilia javascript not js of css file required.
 
 ### How  to use ?
 
