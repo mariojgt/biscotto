@@ -1,8 +1,16 @@
 {
     "name": "mariojgt/biscotto",
-    "description": "A Laravel Package Biscotto, a quick start for new laravel Packages",
+    "description": "A Laravel Package Biscotto, will help you enable and disable cookies or scripts that gdpr use.",
     "keywords": [
-        "laravel"
+        "laravel",
+        "GDPR",
+        "Cookie manager",
+        "cookie",
+        "cookie gdpr",
+        "script gdpr",
+        "analytics",
+        "gdpr laravel",
+        "laravel gdpr"
     ],
     "type": "laravel",
     "license": "MIT",
