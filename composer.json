@@ -1,6 +1,6 @@
 {
     "name": "mariojgt/biscotto",
-    "description": "A Laravel Package Biscotto, will help you enable and disable cookies or scripts that gdpr use.",
+    "description": "A Laravel Package Biscotto, will help you enable and disable cookies or scripts that required gdpr compliance.",
     "keywords": [
         "laravel",
         "GDPR",
