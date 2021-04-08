@@ -1,4 +1,4 @@
-# Biscotto, GDPR cookie managerfor Laravel
+# Biscotto, GDPR cookie manager for Laravel
 
 ### features
 
