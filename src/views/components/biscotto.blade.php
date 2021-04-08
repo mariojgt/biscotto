@@ -1,15 +1,13 @@
 <style>
     *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
 .cookie-container{
-
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
+  margin: auto;
+  position: absolute;
+  top: 50%; left: 0; bottom: 0; right: 0;
 }
 
 .cookie-card {
@@ -135,6 +133,7 @@
   padding-right:20px;
   background:#FAFBFB;
   display:flex;
+  gap:20px;
   justify-content:flex-end;
 }
 
@@ -172,7 +171,7 @@
     }
 
     // Returns an object of key value pairs for this page's cookies
-    function getPageCookies(){
+    function getPageCookies () {
 
         // cookie is a string containing a semicolon-separated list, this split puts it into an array
         var cookieArr = document.cookie.split(";");
@@ -201,7 +200,7 @@
         document.cookie = name + '=; Max-Age=0'
     }
 
-    // To toogle the cookie case user need to select option
+    // To toogle the cookie case user need to select option usable in the cookie popup
     function showCookie () {
         let setting = document.querySelector('#cookie-plugin');
 
@@ -256,87 +255,163 @@
 
         // The storage varaible that will make the user save the option if the cookie is enable
         addItemStorage(cookieStorageName, true);
-            (async () => {
-                const rawResponse = await fetch('/biscotto/savecookie', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type"    : "application/json",
-                        "Accept"          : "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "X-CSRF-Token"    : '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        cookie_options           : cookieOptions,
-                    })
-                });
-                const content = await rawResponse.json();
-                console.log(content);
-                // Check for errors
-                if (content.errors) {
-                    for (const [key, value] of Object.entries(content.errors)) {
-                        console.log(value);
-                    }
-                } else {
-
-                }
-            })();
-
-        // Reload the page to make sure chagne has happen
-        setTimeout(() => {
-            location.reload();
-        }, 1);
-        // console.log(cookieOptions);
-        // Dynamic way to remove script from doom
-        //const scriptList = document.querySelectorAll("script[type='text/javascript']");
-        //console.log(scriptList[0].src);
-        //const convertedNodeList = Array.from(scriptList);
-        //const testScript = convertedNodeList[0];
-        //testScript.parentNode.removeChild(testScript);
-
-        //const scriptList2 = document.querySelectorAll("script[type='text/javascript']");
-
-        //console.log(scriptList2);
-
+        // The varaible tha will store the user options
+        addItemStorage('cookieOptions', JSON.stringify(cookieOptions));
+        // Run the script to enable or disable the cookies
+        scriptEnableDisable();
+        // Delete all teh cookie based in the customer actions
+        cookieKill();
     }
 
-    // for (const [key, value] of Object.entries(getPageCookies())) {
-    //     eraseCookie(key);
-    // }
-        console.log(getPageCookies());
+    // This fuction is all once the user acpper the cookie policy and on load if is accpted
+    const cookieStatstics = JSON.parse('@json(config('biscotto.cookie_statstics'))');
+    const cookieMarketing = JSON.parse('@json(config('biscotto.cookie_marketing'))');
+    const cookieFunctional =JSON.parse('@json(config('biscotto.cookie_functional'))');
+
+    function cookieKill() {
+        console.log(cookieFunctional);
+        for (const [key, value] of Object.entries(JSON.parse(getItemStorage('cookieOptions')))) {
+            for (const [cookieKey, cookie] of Object.entries(value)) {
+                switch (cookieKey) {
+                    case 'functional':
+                        if (cookie == false) {
+                            // Loop the config varaible to remove the cookies
+                            cookieFunctional.forEach(element => {
+                                eraseCookie(element);
+                            });
+                        }
+                    break;
+                    case 'statstics':
+                        if (cookie == false) {
+                            // Loop the config varaible to remove the cookies
+                            cookieStatstics.forEach(element => {
+                                eraseCookie(element);
+                            });
+                        }
+                    break;
+                    case 'marketing':
+                        if (cookie == false) {
+                            // Loop the config varaible to remove the cookies
+                            cookieMarketing.forEach(element => {
+                                eraseCookie(element);
+                            });
+                        }
+                    break;
+                    default:
+                        //console.log('normalasdasd');
+                        break;
+                }
+            }
+        }
+    }
+
+    // This fuction is all once the user acpper the cookie policy and on load if is accpted
+    const cookieIdStatstics  = '{{ config('biscotto.script_cookie_statstics') }}';
+    const cookieIdMarketing  = '{{ config('biscotto.script_cookie_marketing') }}';
+    const cookieIdFunctional = '{{ config('biscotto.script_cookie_functional') }}';
+    // This function will loop true the dom and based in the biscotto config file will disable or enable scripts
+    function scriptEnableDisable() {
+        // Loop the user selected options stored in the local storage
+        for (const [key, value] of Object.entries(JSON.parse(getItemStorage('cookieOptions')))) {
+            for (const [cookieKey, cookie] of Object.entries(value)) {
+                // Now check the option we try to check
+                // Note that you need to the add id in the script or iframe you want to enable or disable
+                switch (cookieKey) {
+                    // If is functional will disable or enable the scripts
+                    case 'functional':
+                        // List scripts to enable or disable
+                        var scriptList = document.querySelectorAll("#"+cookieIdFunctional);
+                        // If the user option is true means that will enable the script
+                        if (cookie == true) {
+                            scriptList.forEach(element => {
+                                if(element.getAttribute('data-src')) {
+                                    element.setAttribute('src',element.getAttribute('data-src'));
+                                    element.removeAttribute('data-src');
+                                }
+                            });
+                        } else {
+                            // Disable the scripts case use change his mind
+                            scriptList.forEach(element => {
+                                if(element.getAttribute('src')) {
+                                    element.setAttribute('data-src',element.getAttribute('src'));
+                                    element.removeAttribute('src');
+                                }
+                            });
+                        }
+                    break;
+                    // If is statstics will disable or enable the scripts
+                    case 'statstics':
+                        // List scripts to enable or disable
+                        var scriptList = document.querySelectorAll("#"+cookieIdStatstics);
+                        // If the user option is true means that will enable the script
+                        if (cookie == true) {
+                            scriptList.forEach(element => {
+                                if(element.getAttribute('data-src')) {
+                                    element.setAttribute('src',element.getAttribute('data-src'));
+                                    element.removeAttribute('data-src');
+                                }
+                            });
+                        } else {
+                            // Disable the scripts case use change his mind
+                            scriptList.forEach(element => {
+                                if(element.getAttribute('src')) {
+                                    element.setAttribute('data-src',element.getAttribute('src'));
+                                    element.removeAttribute('src');
+                                }
+                            });
+                        }
+                    break;
+                    // If is marketing will disable or enable the scripts
+                    case 'marketing':
+                        // List scripts to enable or disable
+                        var scriptList = document.querySelectorAll("#"+cookieIdMarketing);
+                        // If the user option is true means that will enable the script
+                        if (cookie == true) {
+                            scriptList.forEach(element => {
+                                if(element.getAttribute('data-src')) {
+                                    element.setAttribute('src',element.getAttribute('data-src'));
+                                    element.removeAttribute('data-src');
+                                }
+                            });
+                        } else {
+                            // Disable the scripts case use change his mind
+                            scriptList.forEach(element => {
+                                if(element.getAttribute('src')) {
+                                    element.setAttribute('data-src',element.getAttribute('src'));
+                                    element.removeAttribute('src');
+                                }
+                            });
+                        }
+                    break;
+                    default:
+                        //console.log('normalasdasd');
+                        break;
+                }
+            }
+        }
+    }
+
+
+    // If debug is enable will displat all the avaliable cookies in the site
+    const biscottoDebug ='{{ config('biscotto.biscotto_debug') }}';
+    if (biscottoDebug == true) {
+        // On page fuly loaded
+        window.addEventListener('load', function () {
+            console.log('Site Avaliable Cookies', getPageCookies());
+            console.log(showActiveScripts());
+        });
+    }
 
 </script>
 
-{{-- necessary no need to add --}}
-@if (!empty(Session::get('cookie_necessary')))
-    @if (Session::get('cookie_necessary'))
-        {{ $cookie_necessary }}
-    @endif
-@endif
-{{-- functional scripts slot --}}
-@if (!empty(Session::get('cookie_functional')))
-    @if (Session::get('cookie_functional'))
-        {{ $cookie_functional }}
-    @endif
-@endif
 
-{{-- Statstics script slot--}}
-@if (!empty(Session::get('cookie_statstics')))
-    @if (Session::get('cookie_statstics'))
-        {{ $cookie_statstics }}
-    @endif
-@endif
-{{-- marketing script slot --}}
-@if (!empty(Session::get('cookie_marketing')))
-    @if (Session::get('cookie_marketing'))
-        {{ $cookie_marketing }}
-    @endif
-@endif
+    {{ $slot }}
 
 <div class="cookie-container" id="cookie-plugin" >
     <div class="cookie-card main">
         <h3>Do you allow us to use cookies? </h3>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, repellendus maxime! Vitae consequatur atque possimus, maxime quos aperiam tenetur voluptatibus ullam facere alias, nulla totam.
+            {{ config('biscotto.biscotto_message') ?? 'Missing config' }}
         </p>
         <div class="cookie-buttons">
             <button class="cookie-btn" onclick="showCookieSettings()" >Customize</button>
@@ -379,6 +454,7 @@
             </div>
         </div>
         <div class="actions">
+            <a href="{{ config('biscotto.biscotto_link') ?? 'Missing config' }}" class="cookie-btn bg" >Cookie policy</a>
             <button class="cookie-btn bg" onclick="acceptCookie()" >Save and Submit</button>
         </div>
     </div>
@@ -388,13 +464,16 @@
 <x-biscotto::cookie_floater/>
 
 <script>
-
-  // If the cookie is aceepted will hide on load
-  if (getItemStorage(cookieStorageName)) {
+    // On page fuly loaded
+    window.addEventListener('load', function () {
+        // If the cookie is aceepted will hide on load
         if (getItemStorage(cookieStorageName)) {
-          let setting = document.querySelector('#cookie-plugin');
-          setting.style.display = "none";
-        }
-    }
-
+                if (getItemStorage(cookieStorageName)) {
+                    let setting = document.querySelector('#cookie-plugin');
+                    setting.style.display = "none";
+                    scriptEnableDisable();
+                    cookieKill();
+                }
+            }
+    });
 </script>

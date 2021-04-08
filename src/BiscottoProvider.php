@@ -32,21 +32,6 @@ class BiscottoProvider extends ServiceProvider
 
     public function publish()
     {
-        // Publish the npm case we need to do soem developent
-        $this->publishes([
-            __DIR__.'/../Publish/Npm/' => base_path()
-        ]);
-
-        // Publish the resource in case we need to compile
-        $this->publishes([
-            __DIR__.'/../Publish/Resource/' => resource_path('vendor/Biscotto/')
-        ]);
-
-        // Publish the public folder
-        $this->publishes([
-            __DIR__.'/../Publish/Public/' => public_path('vendor/Biscotto/')
-        ]);
-
         // Publish the public folder
         $this->publishes([
             __DIR__.'/../Publish/Config/' => config_path('')
