@@ -1,3 +1,5 @@
+![image info](https://raw.githubusercontent.com/mariojgt/biscotto/main/Publish/Image/Biscotto.png)
+
 # Biscotto, GDPR cookie manager for Laravel
 
 ### features
