@@ -1,10 +1,28 @@
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+/* Normal cookie container */
 .cookie-container{
+  margin: auto;
+  position: absolute;
+  top: 80%; left: 0; bottom: 0; right: 0;
+}
+
+.dark-mode * {
+  background-color: black;
+  color: white;
+}
+
+.light-mode * {
+  background-color: white;
+  color: black;
+}
+
+ /* If the cookie container is open */
+.cookie-container-open{
   margin: auto;
   position: absolute;
   top: 50%; left: 0; bottom: 0; right: 0;
@@ -12,7 +30,7 @@
 
 .cookie-card {
   padding:1.2rem;
-  background-color:#fff;
+  /* background-color:#fff; */
   text-align:center;
   box-shadow: 1px 3px 5px 1px rgba(0,0,0,.1);
 }
@@ -31,29 +49,29 @@
   align-items:center;
   gap:20px;
 }
-.cookie-btn{
+.cookie-btn {
   padding:.75rem 1.5rem;
   border-radius:4px;
-  border:1px solid #7C4970;
+  border:1px solid #d90505;
   outline:none;
   background:transparent;
   font-weight:bold;
-  color:#7C4970;
+  color:#d90505;
   cursor:pointer;
   transition:.2s ease-in-out;
 }
 .bg{
-  background-color:#FC8490;
+  background-color:#433EDB;
   color:#FAFBFB;
-  border-color:#FC8490;
-  box-shadow: 5px 5px 15px -6px #D48EA6;
+  border-color:#433EDB;
+  box-shadow: 5px 5px 15px -6px #433EDB;
 }
 .bg:hover,
 .cookie-btn:hover{
 /*   box-shadow: 6px 8px 5px -7px #FC8490; */
   color:#FAFBFB;
-  border-color: #fa7885;
-  background-color:#fa7885;
+  border-color: #DB3E3E;
+  background-color:#DB3E3E;
 }
 /* .setting{
   position:absolute;
@@ -131,7 +149,7 @@
   margin-top:20px;
   padding-top:10px;
   padding-right:20px;
-  background:#FAFBFB;
+  /* background:#FAFBFB; */
   display:flex;
   gap:20px;
   justify-content:flex-end;
@@ -146,11 +164,16 @@
     let cookieStorageName = 'cookie_status';
 
     function showCookieSettings () {
-        let setting = document.querySelector('#cookie-settings');
+        let setting      = document.querySelector('#cookie-settings');
+        let cookiePlugin = document.querySelector('#cookie-plugin');
         if (setting.style.display === "none") {
             setting.style.display = "block";
+            cookiePlugin.classList.toggle('cookie-container');
+            cookiePlugin.classList.toggle('cookie-container-open');
         } else {
             setting.style.display = "none";
+            cookiePlugin.classList.toggle('cookie-container-open');
+            cookiePlugin.classList.toggle('cookie-container');
         }
     }
 
@@ -407,7 +430,7 @@
 
     {{ $slot }}
 
-<div class="cookie-container" id="cookie-plugin" >
+<div class="cookie-container dark-mode" id="cookie-plugin" >
     <div class="cookie-card main">
         <h3>Do you allow us to use cookies? </h3>
         <p>
