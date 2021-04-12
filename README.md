@@ -2,6 +2,11 @@
 
 # Biscotto, GDPR cookie manager for Laravel
 
+### instalation
+
+- composer require mariojgt/biscotto
+- php artisan v:p --force
+
 ### features
 
 - Cookie list to disable
