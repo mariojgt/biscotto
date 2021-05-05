@@ -20,7 +20,7 @@
             "email": "mariojgt2@gmail.com"
         }
     ],
-    "require":{
+    "require": {
         "php": "^7.3|^8.0"
     },
     "autoload": {
@@ -28,13 +28,11 @@
             "Mariojgt\\Biscotto\\": "src"
         }
     },
-
     "scripts": {
         "post-autoload-dump": [
             "@php artisan route:list"
         ]
     },
-
     "extra": {
         "laravel": {
             "providers": [

@@ -61,6 +61,6 @@ return [
     |
     |
     */
-    'biscotto_message' => 'Your Cookie message.',
-    'biscotto_link'    => 'youlink.com',
+    'biscotto_message' => 'Your Cookie message.',   // Box Message
+    'biscotto_link'    => 'youlink.com',            // Yor Cookie policy link
 ];

@@ -1,4 +1,5 @@
 <?php
+
 namespace Mariojgt\Biscotto;
 
 use Illuminate\Support\Facades\Event;
@@ -14,10 +15,10 @@ class BiscottoProvider extends ServiceProvider
     public function boot()
     {
         // Load biscotto views
-        $this->loadViewsFrom(__DIR__.'/views', 'biscotto');
+        $this->loadViewsFrom(__DIR__ . '/views', 'biscotto');
 
         // Load biscotto routes
-        $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
     }
 
     /**
@@ -34,7 +35,7 @@ class BiscottoProvider extends ServiceProvider
     {
         // Publish the public folder
         $this->publishes([
-            __DIR__.'/../Publish/Config/' => config_path('')
+            __DIR__ . '/../Publish/Config/' => config_path('')
         ]);
     }
 }

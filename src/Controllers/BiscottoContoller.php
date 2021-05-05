@@ -24,7 +24,7 @@ class BiscottoContoller extends Controller
         // Create the session that will be use so the cookie can remember the user
         foreach (Request('cookie_options') as $key => $value) {
             foreach ($value as $keyValue => $cookie) {
-                session(['cookie_'.$keyValue => $cookie]);
+                session(['cookie_' . $keyValue => $cookie]);
             }
         }
 
