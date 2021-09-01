@@ -89,4 +89,4 @@ You can also customize the message and the link for the cookie popup inside the 
 
 ## Notice
 
-The legislation is pretty very vague on how to display the warning,  which texts are necessary, and what options you need to provide. This  package will go a long way towards compliance, but if you want to be  100% sure that your website is ok, you should consult a legal expert.
+The legislation is pretty very vague on how to display the warning, which texts are necessary, and what options you need to provide. This  package will go a long way towards compliance, but if you want to be 100% sure that your website is ok, you should consult a legal expert.
