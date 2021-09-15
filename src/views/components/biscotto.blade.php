@@ -426,7 +426,7 @@
 
 <div class="cookie-container" id="cookie-plugin">
     <div class="cookie-card main">
-        <h3>Do you allow us to use cookies? </h3>
+        <h3 style="color: black" >Do you allow us to use cookies? </h3>
         <p>
             {{ config('biscotto.biscotto_message') ?? 'Missing config' }}
         </p>
@@ -438,32 +438,32 @@
     <div class="cookie-card setting" style="display:none" id="cookie-settings">
         <div class="header">
             <img src="https://s2.svgbox.net/octicons.svg?ic=arrow-left&color=000" width="32" height="32">
-            <h3>Customize your preference</h3>
+            <h3 style="color: black" >Customize your preference</h3>
         </div>
         <div class="contents">
             <div class="content">
-                <span>Nesassary</span>
+                <span style="color: black" >Nesassary</span>
                 <label class="switch">
                     <input type="checkbox" disabled checked>
                     <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span>Functional</span>
+                <span style="color: black" >Functional</span>
                 <label class="switch">
                     <input type="checkbox" checked id="cookie-functional">
                     <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span>Statstics</span>
+                <span style="color: black" >Statstics</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-statstics">
                     <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span>Marketing</span>
+                <span style="color: black" >Marketing</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-marketing">
                     <span class="rounded"></span>
