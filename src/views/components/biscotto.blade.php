@@ -1,147 +1,164 @@
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-.cookie-container{
-  margin: auto;
-  position: absolute;
-  top: 50%; left: 0; bottom: 0; right: 0;
-}
 
-.cookie-card {
-  padding:1.2rem;
-  background-color:#fff;
-  text-align:center;
-  box-shadow: 1px 3px 5px 1px rgba(0,0,0,.1);
-}
-.cookie-card h3 {
-  font-size:21px;
-  padding:20px;
-}
-.cookie-card p{
-  font-size: 14px;
-  color: rgba(0,0,0,.8);
-  padding-bottom:20px;
-}
-.cookie-buttons{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:20px;
-}
-.cookie-btn{
-  padding:.75rem 1.5rem;
-  border-radius:4px;
-  border:1px solid #7C4970;
-  outline:none;
-  background:transparent;
-  font-weight:bold;
-  color:#7C4970;
-  cursor:pointer;
-  transition:.2s ease-in-out;
-}
-.bg{
-  background-color:#FC8490;
-  color:#FAFBFB;
-  border-color:#FC8490;
-  box-shadow: 5px 5px 15px -6px #D48EA6;
-}
-.bg:hover,
-.cookie-btn:hover{
-/*   box-shadow: 6px 8px 5px -7px #FC8490; */
-  color:#FAFBFB;
-  border-color: #fa7885;
-  background-color:#fa7885;
-}
-/* .setting{
+    .cookie-container {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .cookie-card {
+        padding: 1.2rem;
+        background-color: #fff;
+        text-align: center;
+        box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, .1);
+    }
+
+    .cookie-card h3 {
+        font-size: 21px;
+        padding: 20px;
+    }
+
+    .cookie-card p {
+        font-size: 14px;
+        color: rgba(0, 0, 0, .8);
+        padding-bottom: 20px;
+    }
+
+    .cookie-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .cookie-btn {
+        padding: .75rem 1.5rem;
+        border-radius: 4px;
+        border: 1px solid #7C4970;
+        outline: none;
+        background: transparent;
+        font-weight: bold;
+        color: #7C4970;
+        cursor: pointer;
+        transition: .2s ease-in-out;
+    }
+
+    .bg {
+        background-color: #FC8490;
+        color: #FAFBFB;
+        border-color: #FC8490;
+        box-shadow: 5px 5px 15px -6px #D48EA6;
+    }
+
+    .bg:hover,
+    .cookie-btn:hover {
+        /*   box-shadow: 6px 8px 5px -7px #FC8490; */
+        color: #FAFBFB;
+        border-color: #fa7885;
+        background-color: #fa7885;
+    }
+
+    /* .setting{
   position:absolute;
   top:0;
   left:0;
   bottom:0;
   right:0;
 } */
-.setting .header{
-  display:flex;
-  align-items:center;
-}
-.setting .contents {
-  display:flex;
-  justify-content:space-evenly;
-  /* flex-wrap:wrap; */
-  margin-top:20px;
-  gap:20px;
-}
-.switch .contents .content{
-  display:flex;
-  justify-content:space-evenly;
-  align-items:center;
-}
-.content span{
-  font-size: 14px;
-/*   margin-right:10px; */
-}
-.switch {
-  position:relative;
-  display:inline-block;
-  width:60px;
-  height:30px;
-}
-.switch input{
-  width:0;
-  height:0;
-  opacity:0;
-}
-.rounded{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:#ccc;
-  border-radius:50px;
-  transition:.2s ease-in-out;
-}
-.rounded::before{
-  content:"";
-  position:absolute;
-  width:25px;
-  height:25px;
-/*   margin:3px; */
-  background-color:#fff;
-  border-radius:50%;
-  left:3px;
-  bottom:2.2px;
-  transition:inherit;
-}
-.switch input:checked + .rounded {
-  background-color:#81D9CD;
-}
-.switch input:focus + .rounded {
-  box-shadow: 0 0 1px #2196F3;
-}
-.switch input:checked + .rounded:before {
-  -webkit-transform: translateX(30px);
-  -ms-transform: translateX(30px);
-  transform: translateX(30px);
-}
+    .setting .header {
+        display: flex;
+        align-items: center;
+    }
 
-.setting .actions {
-  margin-top:20px;
-  padding-top:10px;
-  padding-right:20px;
-  background:#FAFBFB;
-  display:flex;
-  gap:20px;
-  justify-content:flex-end;
-}
+    .setting .contents {
+        display: flex;
+        justify-content: space-evenly;
+        /* flex-wrap:wrap; */
+        margin-top: 20px;
+        gap: 20px;
+    }
 
+    .switch .contents .content {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .content span {
+        font-size: 14px;
+        /*   margin-right:10px; */
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+    }
+
+    .switch input {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    .rounded {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #ccc;
+        border-radius: 50px;
+        transition: .2s ease-in-out;
+    }
+
+    .rounded::before {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        /*   margin:3px; */
+        background-color: #fff;
+        border-radius: 50%;
+        left: 3px;
+        bottom: 2.2px;
+        transition: inherit;
+    }
+
+    .switch input:checked+.rounded {
+        background-color: #81D9CD;
+    }
+
+    .switch input:focus+.rounded {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    .switch input:checked+.rounded:before {
+        -webkit-transform: translateX(30px);
+        -ms-transform: translateX(30px);
+        transform: translateX(30px);
+    }
+
+    .setting .actions {
+        margin-top: 20px;
+        padding-top: 10px;
+        padding-right: 20px;
+        background: #FAFBFB;
+        display: flex;
+        gap: 20px;
+        justify-content: flex-end;
+    }
 </style>
 
 
 <script>
-
     // Required varaibles
     let cookieStorageName = 'cookie_status';
 
@@ -405,63 +422,63 @@
 </script>
 
 
-    {{ $slot }}
+{{ $slot }}
 
-<div class="cookie-container" id="cookie-plugin" >
+<div class="cookie-container" id="cookie-plugin">
     <div class="cookie-card main">
-        <h3 style="color:black" >Do you allow us to use cookies? </h3>
+        <h3>Do you allow us to use cookies? </h3>
         <p>
             {{ config('biscotto.biscotto_message') ?? 'Missing config' }}
         </p>
         <div class="cookie-buttons">
-            <button class="cookie-btn" onclick="showCookieSettings()" >Customize</button>
-            <button class="cookie-btn bg" onclick="acceptCookie(true)" >Allow All</button>
+            <button class="cookie-btn" onclick="showCookieSettings()">Customize</button>
+            <button class="cookie-btn bg" onclick="acceptCookie(true)">Allow All</button>
         </div>
     </div>
-    <div class="cookie-card setting" style="display:none" id="cookie-settings" >
+    <div class="cookie-card setting" style="display:none" id="cookie-settings">
         <div class="header">
             <img src="https://s2.svgbox.net/octicons.svg?ic=arrow-left&color=000" width="32" height="32">
-            <h3 style="color:black" >Customize your preference</h3>
+            <h3>Customize your preference</h3>
         </div>
         <div class="contents">
             <div class="content">
-                <span style="color:black" >Nesassary</span>
+                <span>Nesassary</span>
                 <label class="switch">
-                <input type="checkbox" disabled checked >
-                <span class="rounded"></span>
+                    <input type="checkbox" disabled checked>
+                    <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color:black" >Functional</span>
+                <span>Functional</span>
                 <label class="switch">
-                <input type="checkbox" checked  id="cookie-functional" >
-                <span class="rounded"></span>
+                    <input type="checkbox" checked id="cookie-functional">
+                    <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color:black" >Statstics</span>
+                <span>Statstics</span>
                 <label class="switch">
-                <input type="checkbox" id="cookie-statstics" >
-                <span class="rounded" ></span>
+                    <input type="checkbox" id="cookie-statstics">
+                    <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color:black" >Marketing</span>
+                <span>Marketing</span>
                 <label class="switch">
-                <input type="checkbox" id="cookie-marketing" >
-                <span class="rounded" ></span>
+                    <input type="checkbox" id="cookie-marketing">
+                    <span class="rounded"></span>
                 </label>
             </div>
         </div>
         <div class="actions">
-            <a href="{{ config('biscotto.biscotto_link') ?? 'Missing config' }}" class="cookie-btn bg" >Cookie policy</a>
-            <button class="cookie-btn bg" onclick="acceptCookie()" >Save and Submit</button>
+            <a href="{{ config('biscotto.biscotto_link') ?? 'Missing config' }}" class="cookie-btn bg">Cookie policy</a>
+            <button class="cookie-btn bg" onclick="acceptCookie()">Save and Submit</button>
         </div>
     </div>
 </div>
 
 {{-- Add the cookie floater --}}
-<x-biscotto::cookie_floater/>
+<x-biscotto::cookie_floater />
 
 <script>
     // On page fuly loaded
