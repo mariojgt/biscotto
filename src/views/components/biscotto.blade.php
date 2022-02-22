@@ -162,6 +162,7 @@
     // Required varaibles
     let cookieStorageName = 'cookie_status';
 
+    // DIsplay the cookie settings
     function showCookieSettings () {
         let setting = document.querySelector('#cookie-settings');
         if (setting.style.display === "none") {
@@ -285,8 +286,8 @@
     const cookieMarketing = JSON.parse('@json(config('biscotto.cookie_marketing'))');
     const cookieFunctional =JSON.parse('@json(config('biscotto.cookie_functional'))');
 
+    // Kill the cookie
     function cookieKill() {
-        console.log(cookieFunctional);
         for (const [key, value] of Object.entries(JSON.parse(getItemStorage('cookieOptions')))) {
             for (const [cookieKey, cookie] of Object.entries(value)) {
                 switch (cookieKey) {
@@ -426,7 +427,7 @@
 
 <div class="cookie-container" id="cookie-plugin">
     <div class="cookie-card main">
-        <h3 style="color: black" >Do you allow us to use cookies? </h3>
+        <h3 style="color: black">Do you allow us to use cookies? </h3>
         <p>
             {{ config('biscotto.biscotto_message') ?? 'Missing config' }}
         </p>
@@ -438,32 +439,32 @@
     <div class="cookie-card setting" style="display:none" id="cookie-settings">
         <div class="header">
             <img src="https://s2.svgbox.net/octicons.svg?ic=arrow-left&color=000" width="32" height="32">
-            <h3 style="color: black" >Customize your preference</h3>
+            <h3 style="color: black">Customize your preference</h3>
         </div>
         <div class="contents">
             <div class="content">
-                <span style="color: black" >Nesassary</span>
+                <span style="color: black">Nesassary</span>
                 <label class="switch">
                     <input type="checkbox" disabled checked>
                     <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color: black" >Functional</span>
+                <span style="color: black">Functional</span>
                 <label class="switch">
                     <input type="checkbox" checked id="cookie-functional">
                     <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color: black" >Statstics</span>
+                <span style="color: black">Statstics</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-statstics">
                     <span class="rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color: black" >Marketing</span>
+                <span style="color: black">Marketing</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-marketing">
                     <span class="rounded"></span>
