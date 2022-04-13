@@ -447,9 +447,7 @@
 <div class="cookie-container" id="cookie-plugin" style="display: none;">
     <div class="cookie-card main">
         <h3 style="color: black">{{ __('biscotto.allow_cookie') }}</h3>
-        <p>
-            {!! __('biscotto.cookie_message') !!}
-        </p>
+        {!! __('biscotto.cookie_message') !!}
         <div class="cookie-buttons">
             <button class="cookie-btn" onclick="showCookieSettings()">{{ __('biscotto.customize') }}</button>
             <button class="cookie-btn bg" onclick="acceptCookie(true)">{{ __('biscotto.allow_all') }}</button>
