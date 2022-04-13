@@ -425,7 +425,7 @@
 
 {{ $slot }}
 
-<div class="cookie-container" id="cookie-plugin">
+<div class="cookie-container" id="cookie-plugin" style="display: none;" >
     <div class="cookie-card main">
         <h3 style="color: black">Do you allow us to use cookies? </h3>
         <p>
@@ -486,12 +486,16 @@
     window.addEventListener('load', function () {
         // If the cookie is aceepted will hide on load
         if (getItemStorage(cookieStorageName)) {
-                if (getItemStorage(cookieStorageName)) {
-                    let setting = document.querySelector('#cookie-plugin');
-                    setting.style.display = "none";
-                    scriptEnableDisable();
-                    cookieKill();
-                }
+            if (getItemStorage(cookieStorageName)) {
+                let setting = document.querySelector('#cookie-plugin');
+                setting.style.display = "none";
+                scriptEnableDisable();
+                cookieKill();
             }
+        } else {
+            // If the cookie is not aceepted will show on load
+            let setting = document.querySelector('#cookie-plugin');
+            setting.style.display = "block";
+        }
     });
 </script>
