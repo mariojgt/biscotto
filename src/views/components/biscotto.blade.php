@@ -429,7 +429,7 @@
     <div class="cookie-card main">
         <h3 style="color: black">{{ __('biscotto.allow_cookie') }}</h3>
         <p>
-            {{ __('biscotto.cookie_message') }}
+            {!! __('biscotto.cookie_message') !!}
         </p>
         <div class="cookie-buttons">
             <button class="cookie-btn" onclick="showCookieSettings()">{{ __('biscotto.customize') }}</button>
