@@ -427,44 +427,44 @@
 
 <div class="cookie-container" id="cookie-plugin" style="display: none;" >
     <div class="cookie-card main">
-        <h3 style="color: black">Do you allow us to use cookies? </h3>
+        <h3 style="color: black">{{ __('biscotto.allow_cookie') }}</h3>
         <p>
-            {{ config('biscotto.biscotto_message') ?? 'Missing config' }}
+            {{ __('biscotto.cookie_message') }}
         </p>
         <div class="cookie-buttons">
-            <button class="cookie-btn" onclick="showCookieSettings()">Customize</button>
-            <button class="cookie-btn bg" onclick="acceptCookie(true)">Allow All</button>
+            <button class="cookie-btn" onclick="showCookieSettings()">{{ __('biscotto.customize') }}</button>
+            <button class="cookie-btn bg" onclick="acceptCookie(true)">{{ __('biscotto.allow_all') }}</button>
         </div>
     </div>
     <div class="cookie-card setting" style="display:none" id="cookie-settings">
         <div class="header">
             <img src="https://s2.svgbox.net/octicons.svg?ic=arrow-left&color=000" width="32" height="32">
-            <h3 style="color: black">Customize your preference</h3>
+            <h3 style="color: black">{{ __('biscotto.preference_message') }}</h3>
         </div>
         <div class="contents">
             <div class="content">
-                <span style="color: black">Necessary</span>
+                <span style="color: black">{{ __('biscotto.necessary') }}</span>
                 <label class="switch">
                     <input type="checkbox" disabled checked>
                     <span class="biscotto-rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color: black">Functional</span>
+                <span style="color: black">{{ __('biscotto.functional') }}</span>
                 <label class="switch">
                     <input type="checkbox" checked id="cookie-functional">
                     <span class="biscotto-rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color: black">Statstics</span>
+                <span style="color: black">{{ __('biscotto.statstics') }}</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-statstics">
                     <span class="biscotto-rounded"></span>
                 </label>
             </div>
             <div class="content">
-                <span style="color: black">Marketing</span>
+                <span style="color: black">{{ __('biscotto.marketing') }}</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-marketing">
                     <span class="biscotto-rounded"></span>
@@ -472,8 +472,8 @@
             </div>
         </div>
         <div class="actions">
-            <a href="{{ config('biscotto.biscotto_link') ?? 'Missing config' }}" class="cookie-btn bg">Cookie policy</a>
-            <button class="cookie-btn bg" onclick="acceptCookie()">Save and Submit</button>
+            <a href="{{ config('biscotto.biscotto_link') ?? 'Missing config' }}" class="cookie-btn bg">{{ __('biscotto.policy') }}</a>
+            <button class="cookie-btn bg" onclick="acceptCookie()">{{ __('biscotto.save') }}</button>
         </div>
     </div>
 </div>

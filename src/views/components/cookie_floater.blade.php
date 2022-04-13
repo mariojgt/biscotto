@@ -35,6 +35,6 @@
 <a href="#" class="float" onclick="showCookie()" onmouseover="onCookiePopup()" onmouseout="offCookiePopup()"
     id="cookie_popup">
     <div class="my-float{">
-        <h1>🍪</h1>
+        <h1 >🍪</h1>
     </div>
 </a>

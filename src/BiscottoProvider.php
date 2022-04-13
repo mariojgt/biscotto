@@ -33,5 +33,9 @@ class BiscottoProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Publish/Config/' => config_path('')
         ]);
+        // Publish the lang folder
+        $this->publishes([
+            __DIR__ . '/../Publish/Lang/' => base_path('lang')
+        ]);
     }
 }
