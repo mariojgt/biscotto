@@ -443,7 +443,7 @@
         </div>
         <div class="contents">
             <div class="content">
-                <span style="color: black">Nesassary</span>
+                <span style="color: black">Necessary</span>
                 <label class="switch">
                     <input type="checkbox" disabled checked>
                     <span class="biscotto-rounded"></span>
