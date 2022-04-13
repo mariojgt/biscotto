@@ -108,7 +108,7 @@
         opacity: 0;
     }
 
-    .rounded {
+    .biscotto-rounded {
         position: absolute;
         top: 0;
         left: 0;
@@ -119,7 +119,7 @@
         transition: .2s ease-in-out;
     }
 
-    .rounded::before {
+    .biscotto-rounded::before {
         content: "";
         position: absolute;
         width: 25px;
@@ -132,15 +132,15 @@
         transition: inherit;
     }
 
-    .switch input:checked+.rounded {
+    .switch input:checked+.biscotto-rounded {
         background-color: #81D9CD;
     }
 
-    .switch input:focus+.rounded {
+    .switch input:focus+.biscotto-rounded {
         box-shadow: 0 0 1px #2196F3;
     }
 
-    .switch input:checked+.rounded:before {
+    .switch input:checked+.biscotto-rounded:before {
         -webkit-transform: translateX(30px);
         -ms-transform: translateX(30px);
         transform: translateX(30px);
@@ -446,28 +446,28 @@
                 <span style="color: black">Nesassary</span>
                 <label class="switch">
                     <input type="checkbox" disabled checked>
-                    <span class="rounded"></span>
+                    <span class="biscotto-rounded"></span>
                 </label>
             </div>
             <div class="content">
                 <span style="color: black">Functional</span>
                 <label class="switch">
                     <input type="checkbox" checked id="cookie-functional">
-                    <span class="rounded"></span>
+                    <span class="biscotto-rounded"></span>
                 </label>
             </div>
             <div class="content">
                 <span style="color: black">Statstics</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-statstics">
-                    <span class="rounded"></span>
+                    <span class="biscotto-rounded"></span>
                 </label>
             </div>
             <div class="content">
                 <span style="color: black">Marketing</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-marketing">
-                    <span class="rounded"></span>
+                    <span class="biscotto-rounded"></span>
                 </label>
             </div>
         </div>
