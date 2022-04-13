@@ -7,8 +7,7 @@ return [
     | Cookie you wish to remove if the user don't allow them
     |--------------------------------------------------------------------------
     |
-    | If you know the cookies name you wish to remove
-    | Once the user don't allow, if you don't know the cookie you can setup
+    | If you know the cookies name you wish to remove please add in here
     | The varaible test mode to true it will show all the cookie inf you browser
     |
     */
@@ -30,8 +29,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | In here you can target scripts an disable or enable them
-    |
-    |
+    | example
+    | <script> data-src="google.com" id="script_cookie_functional" </script>
+    | on cookie enalbe will enable that script to
     |
     */
 
@@ -44,8 +44,8 @@ return [
     | Debug mode
     |--------------------------------------------------------------------------
     |
-    | If you looking for cookie or scripts to disable
-    | Please this option to true
+    |
+    |
     |
     |
     */
@@ -61,5 +61,17 @@ return [
     |
     |
     */
-    'biscotto_link'    => 'youlink.com',            // Yor Cookie policy link
+    'biscotto_link'    => 'yourlink.com',            // Yor Cookie policy link
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cookie popup opacity
+    |--------------------------------------------------------------------------
+    |
+    | Controll the opacity of the button
+    |
+    |
+    |
+    */
+    'biscotto_opacity'    => '0.5',            // Yor Cookie policy link
 ];

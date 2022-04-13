@@ -27,7 +27,7 @@
 
     function offCookiePopup(params) {
         let setting = document.querySelector('#cookie_popup');
-            setting.style.opacity = "0.0";
+            setting.style.opacity = "{{ config('biscotto.biscotto_opacity') }}";
     }
 
 </script>
