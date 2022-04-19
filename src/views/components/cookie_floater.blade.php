@@ -4,7 +4,7 @@
         /* width:60px;
         height:60px; */
         bottom: 40px;
-        left: 40px;
+        left: 5px;
         background-color: black;
         color: #FFF;
         border: 2px solid white;
@@ -47,6 +47,6 @@
 <a href="#" class="float" onclick="showCookie()" onmouseover="onCookiePopup()" onmouseout="offCookiePopup()"
     id="cookie_popup" style="display: none;">
     <div class="my-float">
-        <h1>🍪</h1>
+        <x-biscotto::cookie_icon />
     </div>
 </a>
