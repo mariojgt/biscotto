@@ -9,7 +9,6 @@
         color: #FFF;
         border-radius: 50px;
         text-align: center;
-        box-shadow: 2px 2px 3px #999;
     }
 
 
@@ -34,7 +33,7 @@
 
 <a href="#" class="float" onclick="showCookie()" onmouseover="onCookiePopup()" onmouseout="offCookiePopup()"
     id="cookie_popup">
-    <div class="my-float{">
+    <div class="my-float">
         <h1 >🍪</h1>
     </div>
 </a>
