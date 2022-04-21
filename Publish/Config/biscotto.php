@@ -12,16 +12,12 @@ return [
     |
     */
 
-    'cookie_functional' => [
-
-    ],
+    'cookie_functional' => [],
     // Example
     'cookie_statstics' => [
-        '_ga','_gid','_gat_gtag_UA_152696431_2'
+        '_ga', '_gid', '_gat_gtag_UA_152696431_2'
     ],
-    'cookie_marketing' => [
-
-    ],
+    'cookie_marketing' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +45,7 @@ return [
     |
     |
     */
-    'biscotto_debug' => false,
+    'biscotto_debug' => 'false',
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +57,7 @@ return [
     |
     |
     */
-    'biscotto_link'    => 'yourlink.com',            // Yor Cookie policy link
+    'biscotto_link'    => 'google.com',            // Yor Cookie policy link
 
     /*
     |--------------------------------------------------------------------------
@@ -73,5 +69,5 @@ return [
     |
     |
     */
-    'biscotto_opacity'    => '0.5',            // Yor Cookie policy link
+    'biscotto_opacity'    => '0.5',            // Your cookie button opacity
 ];
