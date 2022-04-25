@@ -69,5 +69,6 @@ return [
     |
     |
     */
-    'biscotto_opacity'    => '0.5',            // Your cookie button opacity
+    'biscotto_opacity' => '0.5',    // Your cookie button opacity
+    'button_collor'    => '#000',   // The cookie pilicy button default color
 ];

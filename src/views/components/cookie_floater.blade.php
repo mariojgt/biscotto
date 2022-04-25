@@ -5,7 +5,7 @@
         height:60px; */
         bottom: 40px;
         left: 5px;
-        background-color: black;
+        background-color: {{ config('biscotto.button_collor') }};
         color: #FFF;
         border: 2px solid white;
         padding: 1px;
