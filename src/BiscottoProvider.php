@@ -14,7 +14,7 @@ class BiscottoProvider extends ServiceProvider
     public function boot()
     {
         // Load biscotto views
-        $this->loadViewsFrom(__DIR__ . '/views', 'biscotto');
+        $this->loadViewsFrom(__DIR__.'/views', 'biscotto');
     }
 
     /**
@@ -31,11 +31,11 @@ class BiscottoProvider extends ServiceProvider
     {
         // Publish the public folder
         $this->publishes([
-            __DIR__ . '/../Publish/Config/' => config_path('')
+            __DIR__.'/../Publish/Config/' => config_path(''),
         ]);
         // Publish the lang folder
         $this->publishes([
-            __DIR__ . '/../Publish/Lang/' => base_path('lang')
+            __DIR__.'/../Publish/Lang/' => base_path('lang'),
         ]);
     }
 }

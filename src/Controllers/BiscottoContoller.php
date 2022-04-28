@@ -2,10 +2,10 @@
 
 namespace Mariojgt\Biscotto\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use File;
+use Illuminate\Http\Request;
 
 class BiscottoContoller extends Controller
 {
@@ -24,15 +24,15 @@ class BiscottoContoller extends Controller
         // Create the session that will be use so the cookie can remember the user
         foreach (Request('cookie_options') as $key => $value) {
             foreach ($value as $keyValue => $cookie) {
-                session(['cookie_' . $keyValue => $cookie]);
+                session(['cookie_'.$keyValue => $cookie]);
             }
         }
 
         // Path we save the log file
-        $path = storage_path() . '/biscotto/';
+        $path = storage_path().'/biscotto/';
         File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
         // Create the log file
-        File::put($path . $request->ip() . '-' . date('Y-m-d') . ".txt", json_encode($logFile));
+        File::put($path.$request->ip().'-'.date('Y-m-d').'.txt', json_encode($logFile));
         // Return message
         return response()->json([
             'message' => true,
