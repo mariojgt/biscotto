@@ -2,6 +2,8 @@
 
 # Biscotto, GDPR cookie manager for Laravel
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D5EJZ3P)
+
 ### instalation
 
 - composer require mariojgt/biscotto
