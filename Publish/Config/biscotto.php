@@ -58,6 +58,7 @@ return [
     |
     */
     'biscotto_link'    => 'google.com',            // Yor Cookie policy link
+    'show_cookie_button_popup' => false,          // Show the cookie button popup
 
     /*
     |--------------------------------------------------------------------------

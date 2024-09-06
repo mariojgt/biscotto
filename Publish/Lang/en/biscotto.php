@@ -11,5 +11,5 @@ return [
     'customize'          => 'Customize',
     'allow_all'          => 'Allow All',
     'allow_cookie'       => 'Do you allow us to use cookies?',
-    'cookie_message'     => 'Your Cookie message',
+    'cookie_message'     => 'We use cookies to give you the best online experience. Please let us know if you agree to all of these cookies.',
 ];

@@ -38,6 +38,12 @@
         gap: 20px;
     }
 
+    .cookie-message {
+        padding-bottom: 20px;
+        text-align: center;
+        font-size: 20px;
+    }
+
     .cookie-btn {
         padding: .75rem 1.5rem;
         border-radius: 4px;
@@ -477,7 +483,9 @@
 <div class="cookie-container" id="cookie-plugin" style="display: none;">
     <div class="cookie-card main">
         <h3 style="color: black">{{ __('biscotto.allow_cookie') }}</h3>
-        {!! __('biscotto.cookie_message') !!}
+        <div class="cookie-message">
+            <p style="color: black">{{ __('biscotto.cookie_message') }}</p>
+        </div>
         <div class="cookie-buttons">
             <button class="cookie-btn" onclick="showCookieSettings()">{{ __('biscotto.customize') }}</button>
             <button class="cookie-btn bg" onclick="acceptCookie(true)">{{ __('biscotto.allow_all') }}</button>
@@ -527,7 +535,9 @@
 </div>
 
 {{-- Add the cookie floater --}}
-<x-biscotto::cookie_floater />
+@if (config('biscotto.show_cookie_button_popup'))
+    <x-biscotto::cookie_floater />
+@endif
 
 <script>
     // On page fuly loaded
