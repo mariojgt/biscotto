@@ -1,168 +1,208 @@
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    :root {
+        --light-bg: #ffffff;
+        --light-text: #1f2937;
+        --light-secondary: #6b7280;
+        --light-border: #e5e7eb;
+        --light-hover: #f3f4f6;
+        --dark-bg: #1f2937;
+        --dark-text: #f3f4f6;
+        --dark-secondary: #9ca3af;
+        --dark-border: #374151;
+        --dark-hover: #374151;
+    }
+
+    @media (prefers-color-scheme: light) {
+        .cookie-container {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+
+        .cookie-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--light-border);
+        }
+
+        .cookie-description {
+            color: var(--light-secondary);
+        }
+
+        .cookie-btn {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            border: 1px solid var(--light-border);
+        }
+
+        .cookie-btn:hover {
+            background-color: var(--light-hover);
+        }
+
+        .cookie-btn.primary {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+        }
+
+        .cookie-btn.primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .switch-slider {
+            background-color: var(--light-border);
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .cookie-container {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .cookie-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.18);
+            border: 1px solid var(--dark-border);
+        }
+
+        .cookie-description {
+            color: var(--dark-secondary);
+        }
+
+        .cookie-btn {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            border: 1px solid var(--dark-border);
+        }
+
+        .cookie-btn:hover {
+            background-color: var(--dark-hover);
+        }
+
+        .cookie-btn.primary {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border: none;
+        }
+
+        .cookie-btn.primary:hover {
+            background-color: #2563eb;
+        }
+
+        .switch-slider {
+            background-color: var(--dark-border);
+        }
     }
 
     .cookie-container {
         position: fixed;
-        z-index: 999999;
-        left: 0;
-        bottom: 0;
-        right: 0;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        max-width: 42rem;
+        margin: 0 auto;
+        z-index: 50;
+        transition: all 0.3s ease;
     }
 
     .cookie-card {
-        padding: 1.2rem;
-        background-color: #fff;
-        text-align: center;
-        box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, .1);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
     }
 
-    .cookie-card h3 {
-        font-size: 21px;
-        padding: 20px;
+    .cookie-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
     }
 
-    .cookie-card p {
-        font-size: 14px;
-        color: rgba(0, 0, 0, .8);
-        padding-bottom: 20px;
+    .cookie-description {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
     }
 
     .cookie-buttons {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .cookie-message {
-        padding-bottom: 20px;
-        text-align: center;
-        font-size: 20px;
+        gap: 0.75rem;
+        justify-content: flex-end;
     }
 
     .cookie-btn {
-        padding: .75rem 1.5rem;
-        border-radius: 4px;
-        border: 1px solid #7C4970;
-        outline: none;
-        background: transparent;
-        font-weight: bold;
-        color: #7C4970;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border-radius: 0.375rem;
         cursor: pointer;
-        transition: .2s ease-in-out;
+        transition: all 0.2s ease;
     }
 
-    .bg {
-        background-color: #FC8490;
-        color: #FAFBFB;
-        border-color: #FC8490;
-        box-shadow: 5px 5px 15px -6px #D48EA6;
+    .settings-container {
+        margin-top: 1.5rem;
     }
 
-    .bg:hover,
-    .cookie-btn:hover {
-        /*   box-shadow: 6px 8px 5px -7px #FC8490; */
-        color: #FAFBFB;
-        border-color: #fa7885;
-        background-color: #fa7885;
-    }
-
-    /* .setting{
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
-} */
-    .setting .header {
+    .settings-header {
         display: flex;
         align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
     }
 
-    .setting .contents {
-        display: flex;
-        justify-content: space-evenly;
-        /* flex-wrap:wrap; */
-        margin-top: 20px;
-        gap: 20px;
+    .settings-content {
+        display: grid;
+        gap: 1rem;
     }
 
-    .switch .contents .content {
+    .cookie-option {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
-    }
-
-    .content span {
-        font-size: 14px;
-        /*   margin-right:10px; */
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s ease;
     }
 
     .switch {
         position: relative;
         display: inline-block;
-        width: 60px;
-        height: 30px;
+        width: 3rem;
+        height: 1.5rem;
     }
 
     .switch input {
+        opacity: 0;
         width: 0;
         height: 0;
-        opacity: 0;
     }
 
-    .biscotto-rounded {
+    .switch-slider {
         position: absolute;
+        cursor: pointer;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: #ccc;
-        border-radius: 50px;
-        transition: .2s ease-in-out;
+        border-radius: 1rem;
+        transition: 0.2s;
     }
 
-    .biscotto-rounded::before {
-        content: "";
+    .switch-slider:before {
         position: absolute;
-        width: 25px;
-        height: 25px;
-        /*   margin:3px; */
-        background-color: #fff;
+        content: "";
+        height: 1.25rem;
+        width: 1.25rem;
+        left: 0.125rem;
+        bottom: 0.125rem;
+        background-color: white;
         border-radius: 50%;
-        left: 3px;
-        bottom: 2.2px;
-        transition: inherit;
+        transition: 0.2s;
     }
 
-    .switch input:checked+.biscotto-rounded {
-        background-color: #81D9CD;
+    input:checked+.switch-slider {
+        background-color: #2563eb;
     }
 
-    .switch input:focus+.biscotto-rounded {
-        box-shadow: 0 0 1px #2196F3;
+    input:checked+.switch-slider:before {
+        transform: translateX(1.5rem);
     }
-
-    .switch input:checked+.biscotto-rounded:before {
-        -webkit-transform: translateX(30px);
-        -ms-transform: translateX(30px);
-        transform: translateX(30px);
-    }
-
-    .setting .actions {
-        margin-top: 20px;
-        padding-top: 10px;
-        padding-right: 20px;
-        background: #FAFBFB;
-        display: flex;
-        gap: 20px;
-        justify-content: flex-end;
-    }
-
 </style>
 
 
@@ -482,54 +522,65 @@
 
 <div class="cookie-container" id="cookie-plugin" style="display: none;">
     <div class="cookie-card main">
-        <h3 style="color: black">{{ __('biscotto.allow_cookie') }}</h3>
-        <div class="cookie-message">
-            <p style="color: black">{{ __('biscotto.cookie_message') }}</p>
-        </div>
+        <h3 class="cookie-title">Cookie Preferences</h3>
+        <p class="cookie-description">
+            We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By
+            clicking "Accept All", you consent to our use of cookies.
+        </p>
         <div class="cookie-buttons">
-            <button class="cookie-btn" onclick="showCookieSettings()">{{ __('biscotto.customize') }}</button>
-            <button class="cookie-btn bg" onclick="acceptCookie(true)">{{ __('biscotto.allow_all') }}</button>
+            <button class="cookie-btn" onclick="showCookieSettings()">Customize</button>
+            <button class="cookie-btn primary" onclick="acceptCookie(true)">Accept All</button>
         </div>
     </div>
-    <div class="cookie-card setting" style="display:none" id="cookie-settings">
-        <div class="header">
-            <img src="https://s2.svgbox.net/octicons.svg?ic=arrow-left&color=000" width="32" height="32">
-            <h3 style="color: black">{{ __('biscotto.preference_message') }}</h3>
+
+    <div class="cookie-card settings-container" style="display:none" id="cookie-settings">
+        <div class="settings-header">
+            <button class="cookie-btn" onclick="showCookieSettings()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <h3 class="cookie-title">Cookie Settings</h3>
         </div>
-        <div class="contents">
-            <div class="content">
-                <span style="color: black">{{ __('biscotto.necessary') }}</span>
+
+        <div class="settings-content">
+            <div class="cookie-option">
+                <span>Necessary (Required)</span>
                 <label class="switch">
                     <input type="checkbox" disabled checked>
-                    <span class="biscotto-rounded"></span>
+                    <span class="switch-slider"></span>
                 </label>
             </div>
-            <div class="content">
-                <span style="color: black">{{ __('biscotto.functional') }}</span>
+
+            <div class="cookie-option">
+                <span>Functional</span>
                 <label class="switch">
                     <input type="checkbox" checked id="cookie-functional">
-                    <span class="biscotto-rounded"></span>
+                    <span class="switch-slider"></span>
                 </label>
             </div>
-            <div class="content">
-                <span style="color: black">{{ __('biscotto.statstics') }}</span>
+
+            <div class="cookie-option">
+                <span>Analytics</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-statstics">
-                    <span class="biscotto-rounded"></span>
+                    <span class="switch-slider"></span>
                 </label>
             </div>
-            <div class="content">
-                <span style="color: black">{{ __('biscotto.marketing') }}</span>
+
+            <div class="cookie-option">
+                <span>Marketing</span>
                 <label class="switch">
                     <input type="checkbox" id="cookie-marketing">
-                    <span class="biscotto-rounded"></span>
+                    <span class="switch-slider"></span>
                 </label>
             </div>
         </div>
-        <div class="actions">
-            <a href="{{ config('biscotto.biscotto_link') ?? 'Missing config' }}"
-                class="cookie-btn bg">{{ __('biscotto.policy') }}</a>
-            <button class="cookie-btn bg" onclick="acceptCookie()">{{ __('biscotto.save') }}</button>
+
+        <div class="cookie-buttons">
+            <a href="#" class="cookie-btn">Privacy Policy</a>
+            <button class="cookie-btn primary" onclick="acceptCookie()">Save Preferences</button>
         </div>
     </div>
 </div>
