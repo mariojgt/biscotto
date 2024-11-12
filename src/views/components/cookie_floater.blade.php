@@ -2,7 +2,7 @@
     .cookie-float {
         position: fixed;
         bottom: 1.5rem;
-        left: 1.5rem;
+        right: 1.5rem;
         z-index: 40;
         display: flex;
         align-items: center;
