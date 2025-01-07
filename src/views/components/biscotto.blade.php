@@ -579,7 +579,7 @@
         </div>
 
         <div class="cookie-buttons">
-            <a href="#" class="cookie-btn">Privacy Policy</a>
+            <a href="{{ config('biscotto.biscotto_link') }}" class="cookie-btn">Privacy Policy</a>
             <button class="cookie-btn primary" onclick="acceptCookie()">Save Preferences</button>
         </div>
     </div>
